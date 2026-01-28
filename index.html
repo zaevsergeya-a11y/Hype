@@ -28,24 +28,25 @@
         }
 
         body {
-            font-family: 'Cinzel', serif;
-            background: 
-                /* Фоновое изображение */
-                url('images/i.webp') center/cover no-repeat fixed,
-                /* Градиент поверх изображения для затемнения/тона */
-                linear-gradient(135deg, rgba(12, 12, 29, 0.9) 0%, rgba(26, 26, 46, 0.9) 50%, rgba(22, 33, 62, 0.9) 100%);
-            color: #e6d5b8;
-            padding: 15px;
-            min-height: 100vh;
-            /* Оставляем ваши радиальные градиенты поверх всего */
-            background-image: 
-                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.1) 0%, transparent 40%),
-                radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.05) 0%, transparent 40%),
-                url('images/i.webp') center/cover no-repeat fixed,
-                linear-gradient(135deg, rgba(12, 12, 29, 0.9) 0%, rgba(26, 26, 46, 0.9) 50%, rgba(22, 33, 62, 0.9) 100%);
-            /* Обеспечиваем наложение градиента поверх изображения */
-            background-blend-mode: overlay;
-        }
+    font-family: 'Cinzel', serif;
+    background: 
+        /* Градиент поверх изображения для затемнения/тона */
+        linear-gradient(135deg, rgba(12, 12, 29, 0.9) 0%, rgba(26, 26, 46, 0.9) 50%, rgba(22, 33, 62, 0.9) 100%),
+        /* Фоновое изображение */
+        url('images/i.webp') center/cover no-repeat;
+    color: #e6d5b8;
+    padding: 15px;
+    min-height: 100vh;
+    /* Оставляем ваши радиальные градиенты поверх всего */
+    background-image: 
+        radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.1) 0%, transparent 40%),
+        radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.05) 0%, transparent 40%),
+        linear-gradient(135deg, rgba(12, 12, 29, 0.9) 0%, rgba(26, 26, 46, 0.9) 50%, rgba(22, 33, 62, 0.9) 100%),
+        url('images/i.webp') center/cover no-repeat;
+    /* Обеспечиваем наложение градиента поверх изображения */
+    background-blend-mode: overlay, overlay, overlay, normal;
+    background-attachment: scroll; /* Изменено с fixed на scroll для мобильных */
+}
 
         #app {
             max-width: 600px;
