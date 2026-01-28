@@ -4,21 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>HYPERIUM | Магазин</title>
     
-    <!-- Иконка для главного экрана iOS -->
-    <link rel="apple-touch-icon" href="images/icon.jpg.jpg">
-    <link rel="apple-touch-icon-precomposed" href="images/icon.jpg.jpg">
-    <meta name="apple-mobile-web-app-title" content="HYPERIUM">
-    
-    <!-- Дополнительные настройки для iOS -->
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Добавлены мета-теги для мобильных устройств -->
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="HYPERIUM">
+    <link rel="apple-touch-icon" href="images/logo.jpg">
+    <link rel="icon" href="images/logo.jpg" type="image/jpeg">
     
-    <!-- Также можно добавить иконку для Android -->
-    <link rel="icon" href="images/icon.jpg.jpg" type="image/jpeg">
-    
+    <title>HYPERIUM | Магазин</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Gideon+Roman&family=Cinzel:wght@400;600;700&family=MedievalSharp&display=swap" rel="stylesheet">
     <style>
@@ -46,6 +40,10 @@
                 linear-gradient(135deg, rgba(12, 12, 29, 0.9) 0%, rgba(26, 26, 46, 0.9) 50%, rgba(22, 33, 62, 0.9) 100%);
             /* Обеспечиваем наложение градиента поверх изображения */
             background-blend-mode: overlay;
+            
+            /* Исправление для iOS Safari */
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
         }
 
         #app {
@@ -135,6 +133,13 @@
             position: relative;
             overflow: hidden;
             box-shadow: 0 4px 15px rgba(139, 0, 0, 0.4);
+            
+            /* Исправление для iOS */
+            -webkit-overflow-scrolling: touch;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            word-break: break-word;
+            hyphens: auto;
         }
 
         .warning-box::before {
@@ -152,6 +157,13 @@
             line-height: 1.5;
             text-align: center;
             font-family: 'Gideon Roman', serif;
+            
+            /* Исправление для iOS */
+            -webkit-hyphens: auto;
+            -moz-hyphens: auto;
+            hyphens: auto;
+            word-break: break-word;
+            overflow-wrap: break-word;
         }
 
         .warning-box p:last-child {
@@ -180,6 +192,7 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .category-btn::before {
@@ -212,6 +225,12 @@
             color: #e6d5b8;
             text-align: center;
             font-family: 'Cinzel', serif;
+            
+            /* Исправление для iOS */
+            -webkit-hyphens: auto;
+            -moz-hyphens: auto;
+            hyphens: auto;
+            word-break: break-word;
         }
 
         .cart-btn {
@@ -233,6 +252,7 @@
             font-family: 'MedievalSharp', cursive;
             letter-spacing: 1px;
             box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+            -webkit-tap-highlight-color: transparent;
         }
 
         .cart-btn:active {
@@ -270,6 +290,7 @@
             border-radius: 10px;
             transition: all 0.3s ease;
             font-family: 'Cinzel', serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .back-btn:active {
@@ -283,6 +304,10 @@
             font-weight: 700;
             font-family: 'MedievalSharp', cursive;
             letter-spacing: 1px;
+            
+            /* Исправление для iOS */
+            overflow-wrap: break-word;
+            word-break: break-word;
         }
 
         .brands-grid {
@@ -305,6 +330,7 @@
             font-family: 'Cinzel', serif;
             position: relative;
             overflow: hidden;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .brand-btn::before {
@@ -352,6 +378,7 @@
             cursor: pointer;
             transition: all 0.3s ease;
             position: relative;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .puffs-btn:active {
@@ -416,6 +443,14 @@
             align-items: center;
             justify-content: center;
             line-height: 1.3;
+            -webkit-tap-highlight-color: transparent;
+            
+            /* Исправление для iOS */
+            overflow-wrap: break-word;
+            word-break: break-word;
+            -webkit-hyphens: auto;
+            -moz-hyphens: auto;
+            hyphens: auto;
         }
 
         .flavor-btn.selected {
@@ -459,6 +494,7 @@
             justify-content: center;
             border: 2px solid #ffd700;
             font-family: 'MedievalSharp', cursive;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .quantity-btn:active {
@@ -489,6 +525,7 @@
             font-family: 'MedievalSharp', cursive;
             letter-spacing: 1px;
             box-shadow: 0 4px 15px rgba(139, 0, 0, 0.4);
+            -webkit-tap-highlight-color: transparent;
         }
 
         .add-to-cart-btn:active {
@@ -507,6 +544,7 @@
             transition: all 0.3s ease;
             border: 2px solid #5d5d8d;
             position: relative;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .cart-item:active {
@@ -550,6 +588,7 @@
             transition: all 0.3s ease;
             border: 2px solid #8b0000;
             font-family: 'MedievalSharp', cursive;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .remove-btn:active {
@@ -580,6 +619,7 @@
             transition: all 0.3s ease;
             border: 2px solid #ffd700;
             font-family: 'MedievalSharp', cursive;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .add-more-btn {
@@ -600,6 +640,7 @@
             gap: 10px;
             border: 2px solid #5d5d8d;
             font-family: 'MedievalSharp', cursive;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .add-more-btn:active {
@@ -642,6 +683,7 @@
             border: 2px solid #ffd700;
             font-family: 'MedievalSharp', cursive;
             letter-spacing: 1px;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .checkout-btn:active {
@@ -664,6 +706,11 @@
             color: #e6d5b8;
             transition: all 0.3s ease;
             font-family: 'Gideon Roman', serif;
+            
+            /* Исправление для iOS */
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
         }
 
         input:focus, textarea:focus {
@@ -691,6 +738,7 @@
             transition: all 0.3s ease;
             border: 2px solid #ffd700;
             font-family: 'MedievalSharp', cursive;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .form button:active {
@@ -759,6 +807,7 @@
             transition: all 0.3s ease;
             color: #e6d5b8;
             font-family: 'Cinzel', serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .strength-btn:active {
@@ -777,6 +826,7 @@
             transition: all 0.3s ease;
             color: #e6d5b8;
             font-family: 'Cinzel', serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .liquid-btn:active {
@@ -883,6 +933,12 @@
         #age-verification-modal {
             animation: fadeIn 0.5s ease;
             backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
         }
 
         #age-confirm-btn:active {
@@ -894,33 +950,147 @@
             transform: translateY(2px);
             box-shadow: 0 2px 10px rgba(40, 40, 80, 0.3);
         }
+
+        /* Специальные стили для модального окна подтверждения возраста на iOS */
+        .age-modal-content {
+            position: relative;
+            z-index: 1001;
+            padding: 30px;
+            max-width: 500px;
+            margin: 0 auto;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .age-modal-warning {
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, rgba(178, 34, 34, 0.9) 0%, rgba(139, 0, 0, 0.9) 100%);
+            color: #ffd700;
+            padding: 20px;
+            border-radius: 12px;
+            border: 2px solid #8b0000;
+            box-shadow: 0 4px 15px rgba(139, 0, 0, 0.4);
+            
+            /* Исправление для iOS */
+            -webkit-overflow-scrolling: touch;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            word-break: break-word;
+            hyphens: auto;
+        }
+
+        .age-modal-warning p {
+            margin-bottom: 15px;
+            font-size: 15px;
+            line-height: 1.5;
+            text-align: center;
+            font-family: 'Gideon Roman', serif;
+            
+            /* Исправление для iOS */
+            -webkit-hyphens: auto;
+            -moz-hyphens: auto;
+            hyphens: auto;
+            word-break: break-word;
+            overflow-wrap: break-word;
+        }
+
+        /* Медиа-запрос для iPhone */
+        @media screen and (max-width: 375px) and (-webkit-min-device-pixel-ratio: 2) {
+            .warning-box p {
+                font-size: 12px;
+                line-height: 1.4;
+            }
+            
+            .age-modal-warning p {
+                font-size: 13px;
+                line-height: 1.4;
+            }
+            
+            .category-btn span:last-child {
+                font-size: 13px;
+            }
+            
+            .brand-btn {
+                font-size: 14px;
+                padding: 20px 8px;
+            }
+            
+            .screen-header h2 {
+                font-size: 19px;
+            }
+        }
+
+        /* Медиа-запрос для маленьких iPhone */
+        @media screen and (max-width: 320px) {
+            .warning-box p {
+                font-size: 11px;
+            }
+            
+            .age-modal-warning p {
+                font-size: 12px;
+            }
+            
+            .title {
+                font-size: 24px;
+            }
+            
+            .subtitle {
+                font-size: 12px;
+            }
+            
+            .category-btn {
+                padding: 20px 5px;
+            }
+            
+            .category-btn span:last-child {
+                font-size: 12px;
+            }
+        }
+
+        /* Исправление для телефонов с вырезом */
+        @supports (padding: env(safe-area-inset-top)) {
+            body {
+                padding-left: calc(15px + env(safe-area-inset-left));
+                padding-right: calc(15px + env(safe-area-inset-right));
+                padding-top: calc(15px + env(safe-area-inset-top));
+                padding-bottom: calc(15px + env(safe-area-inset-bottom));
+            }
+            
+            .cart-summary {
+                margin-bottom: calc(20px + env(safe-area-inset-bottom));
+            }
+        }
     </style>
 </head>
 <body>
     <div id="app">
         <!-- Модальное окно подтверждения возраста -->
-        <div id="age-verification-modal" class="screen" style="display: block; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1000;">
+        <div id="age-verification-modal" class="screen" style="display: block;">
             <div style="background: linear-gradient(135deg, rgba(12, 12, 29, 0.95) 0%, rgba(26, 26, 46, 0.98) 50%, rgba(22, 33, 62, 0.95) 100%); 
                         position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
                         backdrop-filter: blur(10px);"></div>
             
-            <div style="position: relative; z-index: 1001; padding: 30px; max-width: 500px; margin: 0 auto; height: 100vh; display: flex; flex-direction: column; justify-content: center;">
+            <div class="age-modal-content">
                 <div style="text-align: center; margin-bottom: 40px;">
-                    <img src="images/logo.jpg.jpg" alt="HYPERIUM" style="max-width: 200px; height: auto; margin: 0 auto 25px auto; display: block; border-radius: 15px; border: 3px solid #d4af37; 
+                    <img src="images/logo.jpg" alt="HYPERIUM" style="max-width: 200px; height: auto; margin: 0 auto 25px auto; display: block; border-radius: 15px; border: 3px solid #d4af37; 
                     box-shadow: 0 0 30px rgba(212, 175, 55, 0.5); background: rgba(26, 26, 46, 0.8); padding: 15px;">
                     <h1 class="title" style="font-size: 36px;">HYPERIUM</h1>
                     <p class="subtitle" style="font-size: 16px;">⚔️ Элитные испарители и табаки</p>
                 </div>
                 
-                <div class="warning-box" style="margin-bottom: 40px; background: linear-gradient(135deg, rgba(178, 34, 34, 0.9) 0%, rgba(139, 0, 0, 0.9) 100%);">
-                    <p style="font-size: 32px; margin-bottom: 20px;">⚠️ 18+</p>
-                    <p style="font-size: 18px; font-weight: bold; color: #ffd700; margin-bottom: 15px;">
+                <div class="age-modal-warning">
+                    <p style="font-size: 32px; margin-bottom: 20px; line-height: 1.2;">⚠️ 18+</p>
+                    <p style="font-size: 18px; font-weight: bold; color: #ffd700; margin-bottom: 15px; line-height: 1.3;">
                         ИНФОРМАЦИЯ 18+
                     </p>
                     <p style="font-size: 16px; line-height: 1.6; margin-bottom: 20px;">
-                        Данный контент содержит информацию о никотиносодержащей продукции и предназначен исключительно для совершеннолетних. 
+                        Данный контент содержит информацию о никотиносодержащей продукции и предназначен исключительно для совершеннолетних.
                     </p>
-                    <p style="font-size: 16px; line-height: 1.6; margin-bottom: 20px; color: #ffd700; font-weight: bold;">
+                    <p style="font-size: 16px; line-height: 1.6; margin-bottom: 20px; color: #ffd700; font-weight: bold; line-height: 1.3;">
                         ⚠️ КУРЕНИЕ ВРЕДИТ ВАШЕМУ ЗДОРОВЬЮ!
                     </p>
                     <p style="font-size: 16px; line-height: 1.6;">
@@ -930,15 +1100,15 @@
                 
                 <div style="display: flex; flex-direction: column; gap: 20px;">
                     <button id="age-confirm-btn" style="background: linear-gradient(135deg, rgba(212, 175, 55, 0.9) 0%, rgba(255, 215, 0, 0.9) 100%); 
-                            color: #1a1a2e; border: none; border-radius: 12px; padding: 22px; font-size: 20px; font-weight: 700; cursor: pointer; 
+                            color: #1a1a2e; border: none; border-radius: 12px; padding: 22px; font-size: 18px; font-weight: 700; cursor: pointer; 
                             transition: all 0.3s ease; border: 2px solid #ffd700; font-family: 'MedievalSharp', cursive; letter-spacing: 1px;
-                            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);">
+                            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4); -webkit-tap-highlight-color: transparent;">
                         🛡️ Мне исполнилось 18+, я подтверждаю свой возраст
                     </button>
                     
                     <button id="age-decline-btn" style="background: linear-gradient(135deg, rgba(40, 40, 80, 0.9) 0%, rgba(60, 60, 100, 0.9) 100%); 
-                            color: #e6d5b8; border: none; border-radius: 12px; padding: 22px; font-size: 18px; font-weight: 600; cursor: pointer; 
-                            transition: all 0.3s ease; border: 2px solid #4a4a6d; font-family: 'Cinzel', serif;">
+                            color: #e6d5b8; border: none; border-radius: 12px; padding: 22px; font-size: 16px; font-weight: 600; cursor: pointer; 
+                            transition: all 0.3s ease; border: 2px solid #4a4a6d; font-family: 'Cinzel', serif; -webkit-tap-highlight-color: transparent;">
                         🚫 Мне нет 18 лет, покинуть сайт
                     </button>
                 </div>
@@ -952,9 +1122,15 @@
         <!-- Главный экран -->
         <div id="welcome-screen" class="screen">
             <div class="header">
-                <img src="images/logo.jpg.jpg" alt="HYPERIUM" class="logo floating">
+                <img src="images/logo.jpg" alt="HYPERIUM" class="logo floating">
                 <h1 class="title">HYPERIUM</h1>
                 <p class="subtitle">⚔️ Элитные испарители и табаки</p>
+            </div>
+            
+            <div class="warning-box">
+                <p>⚠️ Вся продукция содержит никотин, который вызывает зависимость!</p>
+                <p>Продажа осуществляется лицам старше 18 лет.</p>
+                <p>Ответственное потребление!</p>
             </div>
             
             <div class="categories-grid">
@@ -981,6 +1157,7 @@
             </button>
         </div>
 
+        <!-- Остальные экраны остаются без изменений -->
         <!-- Экран выбора брендов -->
         <div id="brands-screen" class="screen">
             <div class="screen-header">
@@ -1193,74 +1370,74 @@
         const productsData = {
             disposables: {
                 '🔥АКЦИЯ🔥': [
-                    { brand: 'BLK 10к', puffs: '10000', price: 1000, flavors: ['Skittles'], image: 'images/logo.jpg.jpg' },
-                    { brand: 'Bubblmon 15k', puffs: '15000', price: 1000, flavors: ['Вишня Лимон'], image: 'images/logo.jpg.jpg' },
-                    { brand: 'Puffmi 12k', puffs: '12000', price: 800, flavors: ['Свежая Мята', 'Клубничный Йогурт Лед', 'Розовые Фрукты', 'Крансый Грейпфрут', 'Ананасовый Лимонад', 'Ледяная Мята'], image: 'images/logo.jpg.jpg' }
+                    { brand: 'BLK 10к', puffs: '10000', price: 1000, flavors: ['Skittles'], image: 'images/logo.jpg' },
+                    { brand: 'Bubblmon 15k', puffs: '15000', price: 1000, flavors: ['Вишня Лимон'], image: 'images/logo.jpg' },
+                    { brand: 'Puffmi 12k', puffs: '12000', price: 800, flavors: ['Свежая Мята', 'Клубничный Йогурт Лед', 'Розовые Фрукты', 'Крансый Грейпфрут', 'Ананасовый Лимонад', 'Ледяная Мята'], image: 'images/logo.jpg' }
                 ],
                 'БЕЗДЫМНЫЕ': [
-                    { brand: 'Funky&LOST 30k', puffs: '30000', price: 2500, flavors: ['Гуава Малина', 'Жасмин Малина', 'Черника Малина Лед', 'Черная Смородина', 'Вишня Гранат Клюква', 'Кислая Клубника Питайя', 'Кислый Ананас Лед', 'Клюква Виноград', 'Яблоко Груша'], image: 'images/logo.jpg.jpg' }
+                    { brand: 'Funky&LOST 30k', puffs: '30000', price: 2500, flavors: ['Гуава Малина', 'Жасмин Малина', 'Черника Малина Лед', 'Черная Смородина', 'Вишня Гранат Клюква', 'Кислая Клубника Питайя', 'Кислый Ананас Лед', 'Клюква Виноград', 'Яблоко Груша'], image: 'images/logo.jpg' }
                 ],
                 'Brusko': [
-                    { brand: '1400', puffs: '1400', price: 600, flavors: ['Черника', 'Клубника', 'Арбуз', 'Кола', 'Мандарин', 'Банан'], image: 'images/logo.jpg.jpg' }
+                    { brand: '1400', puffs: '1400', price: 600, flavors: ['Черника', 'Клубника', 'Арбуз', 'Кола', 'Мандарин', 'Банан'], image: 'images/logo.jpg' }
                 ],
                 'Monster Bars': [
-                    { brand: '6000', puffs: '6000', price: 700, flavors: ['Черничный Джем', 'Розовый Лимонад', 'Банановый Лед', 'Ягодный Микс'], image: 'images/logo.jpg.jpg' }
+                    { brand: '6000', puffs: '6000', price: 700, flavors: ['Черничный Джем', 'Розовый Лимонад', 'Банановый Лед', 'Ягодный Микс'], image: 'images/logo.jpg' }
                 ],
                 'Plonq': [
-                    { brand: 'Ultra 12k', puffs: '12000', price: 2000, flavors: ['Ванильное мороженое', 'Вишневая бомба', 'Вишневая кола', 'Голубика малина', 'Голубика мята', 'Малина лайм', 'Смородина', 'Цитрусовый мармелад', 'Черника хвоя'], image: 'images/logo.jpg.jpg' },
-                    { brand: 'Max Pro 10k', puffs: '10000', price: 2000, flavors: ['Арбузная жвачка', 'Голубика малина', 'Гранатовый сок', 'Киви лайм', 'Клубничное мороженое', 'Кола лимон', 'Малина мята', 'Цитрусовый мармелад', 'Ягодный энергетик'], image: 'images/logo.jpg.jpg' },
-                    { brand: 'ROQY L 20k', puffs: '20000', price: 2000, flavors: ['Вишня', 'Слива лайм', 'Энергетик черная смородина', 'Вишня черника клюква', 'Ежевика мята', 'Кислая черника малина', 'Клубника киви', 'Клюква виноград', 'Сакура виноград', 'Ягодный микс'], image: 'images/logo.jpg.jpg' }
+                    { brand: 'Ultra 12k', puffs: '12000', price: 2000, flavors: ['Ванильное мороженое', 'Вишневая бомба', 'Вишневая кола', 'Голубика малина', 'Голубика мята', 'Малина лайм', 'Смородина', 'Цитрусовый мармелад', 'Черника хвоя'], image: 'images/logo.jpg' },
+                    { brand: 'Max Pro 10k', puffs: '10000', price: 2000, flavors: ['Арбузная жвачка', 'Голубика малина', 'Гранатовый сок', 'Киви лайм', 'Клубничное мороженое', 'Кола лимон', 'Малина мята', 'Цитрусовый мармелад', 'Ягодный энергетик'], image: 'images/logo.jpg' },
+                    { brand: 'ROQY L 20k', puffs: '20000', price: 2000, flavors: ['Вишня', 'Слива лайм', 'Энергетик черная смородина', 'Вишня черника клюква', 'Ежевика мята', 'Кислая черника малина', 'Клубника киви', 'Клюква виноград', 'Сакура виноград', 'Ягодный микс'], image: 'images/logo.jpg' }
                 ],
                 'GANG': [
-                    { brand: 'Xbox 8000', puffs: '8000', price: 1600, flavors: ['Ананас Малина Вишня', 'Красный Виноград Арбуз', 'Малиновая Колла', 'Колла Лесные Ягоды', 'Черника Малина Мята'], image: 'images/logo.jpg.jpg' }
+                    { brand: 'Xbox 8000', puffs: '8000', price: 1600, flavors: ['Ананас Малина Вишня', 'Красный Виноград Арбуз', 'Малиновая Колла', 'Колла Лесные Ягоды', 'Черника Малина Мята'], image: 'images/logo.jpg' }
                 ],
                 'Lost Mary 20k': [
-                    { brand: '20000', puffs: '20000', price: 1800, flavors: ['Грейпфрут Байя', 'Ледяной Чай', 'Жасмин Малина', 'Белый Персик Байя Всплеск', 'Кислый Ананас Лед', 'Зеленое Яблоко'], image: 'images/logo.jpg.jpg' }
+                    { brand: '20000', puffs: '20000', price: 1800, flavors: ['Грейпфрут Байя', 'Ледяной Чай', 'Жасмин Малина', 'Белый Персик Байя Всплеск', 'Кислый Ананас Лед', 'Зеленое Яблоко'], image: 'images/logo.jpg' }
                 ],
                 'Lost Mary 30k': [
-                    { brand: '30000', puffs: '30000', price: 2000, flavors: ['Кислая Клбника Питайя', 'Кислый Лимон Грейпфрут'], image: 'images/logo.jpg.jpg' }
+                    { brand: '30000', puffs: '30000', price: 2000, flavors: ['Кислая Клбника Питайя', 'Кислый Лимон Грейпфрут'], image: 'images/logo.jpg' }
                 ],
                 'Lost Mary MIXER': [
-                    { brand: '25000', puffs: '25000', price: 2000, flavors: ['Апельсин Клубника', 'Арбузные Конфеты', 'Черника Малина Роза', 'Микс Мята', 'Черника Малина Лед', 'Яблочные Леденцы', 'Вишня Лимон', 'Зеленый чай Лимон Лайм', 'Вишневые Леденцы', 'Яблоко Виноград'], image: 'images/logo.jpg.jpg' }
+                    { brand: '25000', puffs: '25000', price: 2000, flavors: ['Апельсин Клубника', 'Арбузные Конфеты', 'Черника Малина Роза', 'Микс Мята', 'Черника Малина Лед', 'Яблочные Леденцы', 'Вишня Лимон', 'Зеленый чай Лимон Лайм', 'Вишневые Леденцы', 'Яблоко Виноград'], image: 'images/logo.jpg' }
                 ],
                 'Duall': [
-                    { brand: '12000', puffs: '12000', price: 1200, flavors: ['Ледяная Кола Манго', 'Морозный Ананас', 'Мятная Жвачка', 'Пина Колада', 'Спрайт Огурец'], image: 'images/logo.jpg.jpg' }
+                    { brand: '12000', puffs: '12000', price: 1200, flavors: ['Ледяная Кола Манго', 'Морозный Ананас', 'Мятная Жвачка', 'Пина Колада', 'Спрайт Огурец'], image: 'images/logo.jpg' }
                 ],
                 'Geek Bar': [
-                    { brand: '20000', puffs: '20000', price: 1500, flavors: ['Малина Гранат', 'Брусника Лимон', 'Вишня Лайм', 'Грейпфрут Лимон', 'Клюквенный Лимонад Лед', 'Малина Гранат', 'Облепиха'], image: 'images/logo.jpg.jpg' }
+                    { brand: '20000', puffs: '20000', price: 1500, flavors: ['Малина Гранат', 'Брусника Лимон', 'Вишня Лайм', 'Грейпфрут Лимон', 'Клюквенный Лимонад Лед', 'Малина Гранат', 'Облепиха'], image: 'images/logo.jpg' }
                 ],
                 'Elfbar': [
-                    { brand: '30000', puffs: '30000', price: 2000, flavors: ['Леденец Кислая Вишня', 'Арбуз вишня', 'Виноград клюква', 'Гранатовый всплеск', 'Грушевый лимонад', 'Зеленый чай грейпфрут', 'леденец клубника питайя'], image: 'images/logo.jpg.jpg' }
+                    { brand: '30000', puffs: '30000', price: 2000, flavors: ['Леденец Кислая Вишня', 'Арбуз вишня', 'Виноград клюква', 'Гранатовый всплеск', 'Грушевый лимонад', 'Зеленый чай грейпфрут', 'леденец клубника питайя'], image: 'images/logo.jpg' }
                 ],
                 'VOZOL': [
-                    { brand: '25000', puffs: '25000', price: 1700, flavors: ['Арбуз Лед', 'Клубника Киви Лед', 'Вишня', 'Черника'], image: 'images/logo.jpg.jpg' }
+                    { brand: '25000', puffs: '25000', price: 1700, flavors: ['Арбуз Лед', 'Клубника Киви Лед', 'Вишня', 'Черника'], image: 'images/logo.jpg' }
                 ],
                 'WAKA': [
-                    { brand: '20000', puffs: '20000', price: 1800, flavors: ['Малиновая Кола', 'Яблоко Груша', 'вишня', 'Watermelon Chill', 'тройная ягода', 'Манго ягоды', 'Энергетик черн смородина', 'Киви Гуава', 'Клубника Малина', 'Сакура Виноград', 'Смузи персик лимон'], image: 'images/logo.jpg.jpg' }
+                    { brand: '20000', puffs: '20000', price: 1800, flavors: ['Малиновая Кола', 'Яблоко Груша', 'вишня', 'Watermelon Chill', 'тройная ягода', 'Манго ягоды', 'Энергетик черн смородина', 'Киви Гуава', 'Клубника Малина', 'Сакура Виноград', 'Смузи персик лимон'], image: 'images/logo.jpg' }
                 ],
                 'WAKA EXTRA': [
-                    { brand: '20000', puffs: '20000', price: 1900, flavors: ['Чупа-Чупс яблоко', 'Мармелад', 'Виноградный морс', 'Черничный Энергетик', 'Чуппа-Чупс клубника малина', 'Ягодный Микс', 'морская соль лимонная конфета'], image: 'images/logo.jpg.jpg' }
+                    { brand: '20000', puffs: '20000', price: 1900, flavors: ['Чупа-Чупс яблоко', 'Мармелад', 'Виноградный морс', 'Черничный Энергетик', 'Чуппа-Чупс клубника малина', 'Ягодный Микс', 'морская соль лимонная конфета'], image: 'images/logo.jpg' }
                 ]
             },
             tobacco: {
                 'Strong': [
-                    { brand: 'SNVS', strength: 'Strong', price: 400, flavors: ['Свежая мята', 'Ледяная мята', 'Оригинальный'], image: 'images/logo.jpg.jpg' },
-                    { brand: 'Iceburn', strength: 'Strong', price: 400, flavors: ['Black'], image: 'images/logo.jpg.jpg' },
-                    { brand: 'Volt', strength: 'Strong', price: 400, flavors: ['WHITE DRY'], image: 'images/logo.jpg.jpg' },
-                    { brand: 'HIA', strength: 'Strong', price: 400, flavors: ['Жвачка', 'Вишня', 'Кола', 'Банан', 'Мята'], image: 'images/logo.jpg.jpg' }
+                    { brand: 'SNVS', strength: 'Strong', price: 400, flavors: ['Свежая мята', 'Ледяная мята', 'Оригинальный'], image: 'images/logo.jpg' },
+                    { brand: 'Iceburn', strength: 'Strong', price: 400, flavors: ['Black'], image: 'images/logo.jpg' },
+                    { brand: 'Volt', strength: 'Strong', price: 400, flavors: ['WHITE DRY'], image: 'images/logo.jpg' },
+                    { brand: 'HIA', strength: 'Strong', price: 400, flavors: ['Жвачка', 'Вишня', 'Кола', 'Банан', 'Мята'], image: 'images/logo.jpg' }
                 ],
                 'Medium': [
-                    { brand: 'SNVS', strength: 'Medium', price: 400, flavors: ['Оригинальный', 'Вишня-колa', 'Свежая мята'], image: 'images/logo.jpg.jpg' },
-                    { brand: 'Iceburn', strength: 'Medium', price: 400, flavors: ['COLD DRY', 'Original', 'Зеленое яблоко', 'Банан'], image: 'images/logo.jpg.jpg' },
-                    { brand: 'Volt', strength: 'Medium', price: 400, flavors: ['COLD DRY', 'ICE'], image: 'images/logo.jpg.jpg' }
+                    { brand: 'SNVS', strength: 'Medium', price: 400, flavors: ['Оригинальный', 'Вишня-колa', 'Свежая мята'], image: 'images/logo.jpg' },
+                    { brand: 'Iceburn', strength: 'Medium', price: 400, flavors: ['COLD DRY', 'Original', 'Зеленое яблоко', 'Банан'], image: 'images/logo.jpg' },
+                    { brand: 'Volt', strength: 'Medium', price: 400, flavors: ['COLD DRY', 'ICE'], image: 'images/logo.jpg' }
                 ]
             },
             liquids: {
                 'NARCOZ': [
-                    { brand: 'NARCOZ Strong 20 mg', volume: '20 mg', strength: 'Strong', price: 500, flavors: ['Груша Барбарис', 'Леденцы С Витамином', 'Арбуз Вишня', 'Гранат Мультифрукт', 'Ежевика Малина', 'Жвачка С Голубой Малиной', 'Кислое Яблоко Малина', 'Кислые Мишки', 'Лесные Ягоды', 'Малина Виноград', 'Малина Мята', 'Манго Черная Смородина', 'Мятная Жвачка', 'Скитлс', 'Тархун', 'Тропические Фрукты'], image: 'images/logo.jpg.jpg' }
+                    { brand: 'NARCOZ Strong 20 mg', volume: '20 mg', strength: 'Strong', price: 500, flavors: ['Груша Барбарис', 'Леденцы С Витамином', 'Арбуз Вишня', 'Гранат Мультифрукт', 'Ежевика Малина', 'Жвачка С Голубой Малиной', 'Кислое Яблоко Малина', 'Кислые Мишки', 'Лесные Ягоды', 'Малина Виноград', 'Малина Мята', 'Манго Черная Смородина', 'Мятная Жвачка', 'Скитлс', 'Тархун', 'Тропические Фрукты'], image: 'images/logo.jpg' }
                 ],
                 'DUALL': [
-                    { brand: 'DUALL SALT Hard 50 mg', volume: '50 mg', strength: 'SALT Hard', price: 500, flavors: ['Яблоко Малина', 'Спрайт Арбуз Лайм', 'Смородина Малина Яблоко', 'Мятная Жвачка', 'Лесные Ягоды', 'Ледяная Черника', 'Ледяная Мадина', 'Ледяная Кола', 'Клубника Лайм Малина', 'Кислый Виноград Манго', 'Арбузный Лимонад', 'Клубника Банан', 'Вишневый Йогурт'], image: 'images/logo.jpg.jpg' }
+                    { brand: 'DUALL SALT Hard 50 mg', volume: '50 mg', strength: 'SALT Hard', price: 500, flavors: ['Яблоко Малина', 'Спрайт Арбуз Лайм', 'Смородина Малина Яблоко', 'Мятная Жвачка', 'Лесные Ягоды', 'Ледяная Черника', 'Ледяная Мадина', 'Ледяная Кола', 'Клубника Лайм Малина', 'Кислый Виноград Манго', 'Арбузный Лимонад', 'Клубника Банан', 'Вишневый Йогурт'], image: 'images/logo.jpg' }
                 ]
             }
         };
