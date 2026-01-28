@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>ХАЙП | Магазин</title>
+    <title>HYPERIUM | Магазин</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Gideon+Roman&family=Cinzel:wght@400;600;700&family=MedievalSharp&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -14,20 +15,34 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--tg-theme-bg-color, #ffffff);
-            color: var(--tg-theme-text-color, #000000);
-            padding: 20px;
+            font-family: 'Cinzel', serif;
+            background: 
+                /* Фоновое изображение */
+                url('images/i.webp') center/cover no-repeat fixed,
+                /* Градиент поверх изображения для затемнения/тона */
+                linear-gradient(135deg, rgba(12, 12, 29, 0.9) 0%, rgba(26, 26, 46, 0.9) 50%, rgba(22, 33, 62, 0.9) 100%);
+            color: #e6d5b8;
+            padding: 15px;
+            min-height: 100vh;
+            /* Оставляем ваши радиальные градиенты поверх всего */
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.05) 0%, transparent 40%),
+                url('images/i.webp') center/cover no-repeat fixed,
+                linear-gradient(135deg, rgba(12, 12, 29, 0.9) 0%, rgba(26, 26, 46, 0.9) 50%, rgba(22, 33, 62, 0.9) 100%);
+            /* Обеспечиваем наложение градиента поверх изображения */
+            background-blend-mode: overlay;
         }
 
         #app {
             max-width: 600px;
             margin: 0 auto;
+            position: relative;
         }
 
         .screen {
             display: none;
-            animation: fadeIn 0.3s ease;
+            animation: fadeIn 0.5s ease;
         }
 
         .screen.active {
@@ -35,63 +50,113 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from { 
+                opacity: 0; 
+                transform: translateY(20px);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0);
+            }
         }
 
         .header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             padding: 20px 0;
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 10%;
+            right: 10%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #d4af37, #ffd700, #d4af37, transparent);
+            border-radius: 2px;
         }
 
         .logo {
-            max-width: 150px;
+            max-width: 180px;
             height: auto;
-            margin: 0 auto 10px auto;
+            margin: 0 auto 15px auto;
             display: block;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
+            border-radius: 15px;
+            border: 3px solid #d4af37;
+            box-shadow: 
+                0 0 20px rgba(212, 175, 55, 0.5),
+                inset 0 0 20px rgba(212, 175, 55, 0.2);
+            background: rgba(26, 26, 46, 0.8);
+            padding: 10px;
+        }
+
+        .title {
+            font-family: 'MedievalSharp', cursive;
+            font-size: 28px;
+            background: linear-gradient(45deg, #d4af37, #ffd700, #f0e68c);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+            letter-spacing: 1px;
+            margin-bottom: 5px;
         }
 
         .subtitle {
-            color: var(--tg-theme-hint-color, #999999);
-            font-size: 16px;
-            line-height: 1.4;
+            color: #b8a988;
+            font-size: 14px;
+            font-style: italic;
+            letter-spacing: 1px;
         }
 
         .warning-box {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
+            background: linear-gradient(135deg, rgba(139, 0, 0, 0.9) 0%, rgba(178, 34, 34, 0.9) 100%);
+            color: #ffd700;
             padding: 20px;
-            border-radius: 15px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 15px rgba(245, 87, 108, 0.2);
+            border-radius: 12px;
+            margin-bottom: 25px;
+            border: 2px solid #8b0000;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(139, 0, 0, 0.4);
+        }
+
+        .warning-box::before {
+            content: '⚔️';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            opacity: 0.3;
         }
 
         .warning-box p {
             margin-bottom: 10px;
-            font-size: 14px;
+            font-size: 13px;
             line-height: 1.5;
             text-align: center;
+            font-family: 'Gideon Roman', serif;
         }
 
         .warning-box p:last-child {
             margin-bottom: 0;
+            font-weight: bold;
         }
 
         .categories-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 15px;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
         .category-btn {
-            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-            border: none;
-            border-radius: 20px;
-            padding: 25px 15px;
+            background: linear-gradient(135deg, rgba(30, 30, 60, 0.9) 0%, rgba(40, 40, 80, 0.9) 100%);
+            border: 2px solid #4a4a6d;
+            border-radius: 15px;
+            padding: 25px 10px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -99,46 +164,66 @@
             gap: 12px;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(168, 237, 234, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .category-btn:hover::before {
+            left: 100%;
         }
 
         .category-btn:active {
-            transform: scale(0.95);
-            box-shadow: 0 2px 8px rgba(168, 237, 234, 0.3);
+            transform: scale(0.97);
         }
 
         .category-btn span:first-child {
-            font-size: 36px;
+            font-size: 32px;
+            filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.5));
         }
 
         .category-btn span:last-child {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
-            color: #333;
+            color: #e6d5b8;
             text-align: center;
+            font-family: 'Cinzel', serif;
         }
 
         .cart-btn {
             width: 100%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.9) 0%, rgba(255, 215, 0, 0.9) 100%);
+            color: #1a1a2e;
             border: none;
-            border-radius: 15px;
+            border-radius: 12px;
             padding: 18px;
             font-size: 18px;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 12px;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            border: 2px solid #ffd700;
+            font-family: 'MedievalSharp', cursive;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
         }
 
         .cart-btn:active {
             transform: translateY(2px);
-            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
         }
 
         .screen-header {
@@ -146,30 +231,44 @@
             align-items: center;
             gap: 15px;
             margin-bottom: 25px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #2d2d4d;
+            position: relative;
+        }
+
+        .screen-header::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, #d4af37, transparent);
         }
 
         .back-btn {
-            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-            border: none;
-            font-size: 24px;
-            color: #333;
+            background: linear-gradient(135deg, #2d2d4d 0%, #3d3d6d 100%);
+            border: 2px solid #4a4a6d;
+            font-size: 20px;
+            color: #ffd700;
             cursor: pointer;
             padding: 10px 15px;
-            border-radius: 12px;
+            border-radius: 10px;
             transition: all 0.3s ease;
-            box-shadow: 0 2px 8px rgba(168, 237, 234, 0.3);
+            font-family: 'Cinzel', serif;
         }
 
         .back-btn:active {
             transform: scale(0.9);
+            background: linear-gradient(135deg, #3d3d6d 0%, #2d2d4d 100%);
         }
 
         .screen-header h2 {
-            font-size: 24px;
-            color: #333;
+            font-size: 22px;
+            color: #ffd700;
             font-weight: 700;
+            font-family: 'MedievalSharp', cursive;
+            letter-spacing: 1px;
         }
 
         .brands-grid {
@@ -179,22 +278,46 @@
         }
 
         .brand-btn {
-            background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%);
-            border: none;
-            border-radius: 15px;
-            padding: 25px 15px;
-            font-size: 18px;
+            background: linear-gradient(135deg, rgba(40, 40, 80, 0.9) 0%, rgba(60, 60, 100, 0.9) 100%);
+            border: 2px solid #5d5d8d;
+            border-radius: 12px;
+            padding: 25px 10px;
+            font-size: 16px;
             font-weight: 600;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
-            color: #333;
-            box-shadow: 0 4px 15px rgba(148, 252, 121, 0.2);
+            color: #e6d5b8;
+            font-family: 'Cinzel', serif;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .brand-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 1px solid transparent;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #d4af37, #ffd700, #d4af37) border-box;
+            -webkit-mask: 
+                linear-gradient(#fff 0 0) padding-box, 
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .brand-btn:hover::before {
+            opacity: 1;
         }
 
         .brand-btn:active {
             transform: scale(0.95);
-            box-shadow: 0 2px 8px rgba(148, 252, 121, 0.2);
         }
 
         .puffs-grid {
@@ -204,9 +327,9 @@
         }
 
         .puffs-btn {
-            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-            border: none;
-            border-radius: 15px;
+            background: linear-gradient(135deg, rgba(30, 30, 60, 0.9) 0%, rgba(40, 40, 80, 0.9) 100%);
+            border: 2px solid #4a4a6d;
+            border-radius: 12px;
             padding: 15px;
             display: flex;
             flex-direction: column;
@@ -214,7 +337,7 @@
             justify-content: center;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 236, 210, 0.3);
+            position: relative;
         }
 
         .puffs-btn:active {
@@ -222,64 +345,72 @@
         }
 
         .device-image {
-            width: 100px;
-            height: 100px;
+            width: 80px;
+            height: 80px;
             object-fit: contain;
             margin-bottom: 10px;
-            border-radius: 10px;
+            border-radius: 8px;
+            border: 2px solid #4a4a6d;
+            background: rgba(26, 26, 46, 0.8);
+            padding: 5px;
         }
 
         .puffs-name {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
             margin-bottom: 5px;
-            color: #333;
+            color: #ffd700;
             text-align: center;
+            font-family: 'Cinzel', serif;
         }
 
         .puffs-count {
-            font-size: 14px;
-            color: #666;
+            font-size: 13px;
+            color: #b8a988;
             margin-bottom: 5px;
+            font-family: 'Gideon Roman', serif;
         }
 
         .puffs-price {
             font-size: 18px;
             font-weight: 700;
-            color: #667eea;
+            color: #d4af37;
+            font-family: 'MedievalSharp', cursive;
         }
 
         .flavors-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 12px;
-            margin: 25px 0;
+            margin: 20px 0;
         }
 
         .flavor-btn {
-            background: linear-gradient(135deg, #a3bded 0%, #6991c7 100%);
-            border: none;
-            border-radius: 12px;
-            padding: 15px 10px;
-            font-size: 15px;
+            background: linear-gradient(135deg, rgba(40, 40, 80, 0.9) 0%, rgba(60, 60, 100, 0.9) 100%);
+            border: 2px solid #5d5d8d;
+            border-radius: 10px;
+            padding: 15px 8px;
+            font-size: 14px;
             cursor: pointer;
             text-align: center;
             transition: all 0.3s ease;
-            color: white;
+            color: #e6d5b8;
             font-weight: 500;
-            box-shadow: 0 4px 10px rgba(163, 189, 237, 0.3);
-            min-height: 60px;
+            font-family: 'Gideon Roman', serif;
+            min-height: 55px;
             display: flex;
             align-items: center;
             justify-content: center;
-            line-height: 1.4;
+            line-height: 1.3;
         }
 
         .flavor-btn.selected {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.9) 0%, rgba(255, 215, 0, 0.9) 100%);
+            color: #1a1a2e;
+            border-color: #ffd700;
             transform: scale(0.98);
-            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+            font-weight: 600;
         }
 
         .flavor-btn:active {
@@ -291,28 +422,29 @@
             justify-content: center;
             align-items: center;
             gap: 20px;
-            margin: 30px 0;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            margin: 25px 0;
+            background: rgba(30, 30, 60, 0.8);
             padding: 15px;
-            border-radius: 15px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            border: 2px solid #4a4a6d;
         }
 
         .quantity-btn {
-            width: 50px;
-            height: 50px;
+            width: 45px;
+            height: 45px;
             border: none;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: linear-gradient(135deg, #d4af37 0%, #ffd700 100%);
+            color: #1a1a2e;
             border-radius: 50%;
-            font-size: 24px;
-            font-weight: 600;
+            font-size: 22px;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 10px rgba(102, 126, 234, 0.3);
+            border: 2px solid #ffd700;
+            font-family: 'MedievalSharp', cursive;
         }
 
         .quantity-btn:active {
@@ -320,42 +452,47 @@
         }
 
         .quantity-value {
-            font-size: 28px;
+            font-size: 26px;
             font-weight: 700;
-            color: #333;
-            min-width: 50px;
+            color: #ffd700;
+            min-width: 45px;
             text-align: center;
+            font-family: 'Cinzel', serif;
         }
 
         .add-to-cart-btn {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
+            background: linear-gradient(135deg, rgba(139, 0, 0, 0.9) 0%, rgba(178, 34, 34, 0.9) 100%);
+            color: #ffd700;
             border: none;
-            border-radius: 15px;
+            border-radius: 12px;
             padding: 20px;
             font-size: 18px;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
             width: 100%;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(245, 87, 108, 0.3);
+            border: 2px solid #8b0000;
+            font-family: 'MedievalSharp', cursive;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(139, 0, 0, 0.4);
         }
 
         .add-to-cart-btn:active {
             transform: translateY(2px);
-            box-shadow: 0 2px 8px rgba(245, 87, 108, 0.3);
+            box-shadow: 0 2px 8px rgba(139, 0, 0, 0.3);
         }
 
         .cart-item {
-            background: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 15px;
+            background: linear-gradient(135deg, rgba(40, 40, 80, 0.9) 0%, rgba(60, 60, 100, 0.9) 100%);
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             transition: all 0.3s ease;
-            box-shadow: 0 2px 10px rgba(226, 209, 195, 0.3);
+            border: 2px solid #5d5d8d;
+            position: relative;
         }
 
         .cart-item:active {
@@ -363,38 +500,42 @@
         }
 
         .cart-item-info h3 {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 600;
             margin-bottom: 5px;
-            color: #333;
+            color: #ffd700;
+            font-family: 'Cinzel', serif;
         }
 
         .cart-item-info p {
-            font-size: 14px;
-            color: #666;
+            font-size: 13px;
+            color: #b8a988;
             margin-bottom: 5px;
+            font-family: 'Gideon Roman', serif;
         }
 
         .cart-item-info .price {
             font-size: 16px;
-            font-weight: 600;
-            color: #667eea;
+            font-weight: 700;
+            color: #d4af37;
+            font-family: 'MedievalSharp', cursive;
         }
 
         .remove-btn {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
+            background: linear-gradient(135deg, rgba(139, 0, 0, 0.9) 0%, rgba(178, 34, 34, 0.9) 100%);
+            color: #ffd700;
             border: none;
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            font-size: 20px;
+            width: 35px;
+            height: 35px;
+            font-size: 18px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.3s ease;
-            box-shadow: 0 2px 8px rgba(245, 87, 108, 0.3);
+            border: 2px solid #8b0000;
+            font-family: 'MedievalSharp', cursive;
         }
 
         .remove-btn:active {
@@ -404,34 +545,37 @@
         .empty-cart {
             text-align: center;
             padding: 60px 20px;
-            color: #999;
+            color: #8b7d6b;
         }
 
         .empty-cart p {
             font-size: 18px;
             margin-bottom: 20px;
+            font-family: 'Cinzel', serif;
         }
 
         .empty-cart button {
-            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-            color: #333;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.9) 0%, rgba(255, 215, 0, 0.9) 100%);
+            color: #1a1a2e;
             border: none;
-            border-radius: 15px;
+            border-radius: 12px;
             padding: 15px 30px;
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
+            border: 2px solid #ffd700;
+            font-family: 'MedievalSharp', cursive;
         }
 
         .add-more-btn {
-            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-            color: #333;
+            background: linear-gradient(135deg, rgba(40, 40, 80, 0.9) 0%, rgba(60, 60, 100, 0.9) 100%);
+            color: #ffd700;
             border: none;
-            border-radius: 15px;
+            border-radius: 12px;
             padding: 18px;
             font-size: 18px;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
             width: 100%;
             margin-top: 20px;
@@ -440,23 +584,24 @@
             justify-content: center;
             align-items: center;
             gap: 10px;
-            box-shadow: 0 4px 15px rgba(168, 237, 234, 0.3);
+            border: 2px solid #5d5d8d;
+            font-family: 'MedievalSharp', cursive;
         }
 
         .add-more-btn:active {
             transform: translateY(2px);
-            box-shadow: 0 2px 8px rgba(168, 237, 234, 0.3);
         }
 
         .cart-summary {
             position: sticky;
             bottom: 20px;
-            background: white;
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.95) 0%, rgba(40, 40, 80, 0.95) 100%);
             padding: 25px;
-            border-radius: 20px;
-            box-shadow: 0 -4px 25px rgba(0, 0, 0, 0.1);
-            margin-top: 30px;
-            border: 2px solid #f0f0f0;
+            border-radius: 15px;
+            border: 3px solid #d4af37;
+            margin-top: 25px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
         }
 
         .total {
@@ -465,49 +610,53 @@
             font-size: 24px;
             font-weight: 700;
             margin-bottom: 25px;
-            color: #333;
+            color: #ffd700;
+            font-family: 'MedievalSharp', cursive;
         }
 
         .checkout-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.9) 0%, rgba(255, 215, 0, 0.9) 100%);
+            color: #1a1a2e;
             border: none;
-            border-radius: 15px;
+            border-radius: 12px;
             padding: 20px;
             font-size: 18px;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
             width: 100%;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            border: 2px solid #ffd700;
+            font-family: 'MedievalSharp', cursive;
+            letter-spacing: 1px;
         }
 
         .checkout-btn:active {
             transform: translateY(2px);
-            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
         }
 
         .form {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 18px;
             margin-top: 20px;
         }
 
         input, textarea {
             padding: 18px;
-            border: 2px solid #e0e0e0;
-            border-radius: 15px;
+            border: 2px solid #4a4a6d;
+            border-radius: 12px;
             font-size: 16px;
-            background: #f8f9fa;
-            color: #333;
+            background: rgba(30, 30, 60, 0.9);
+            color: #e6d5b8;
             transition: all 0.3s ease;
+            font-family: 'Gideon Roman', serif;
         }
 
         input:focus, textarea:focus {
             outline: none;
-            border-color: #667eea;
-            background: white;
+            border-color: #d4af37;
+            background: rgba(40, 40, 80, 0.9);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
         }
 
         textarea {
@@ -517,15 +666,17 @@
         }
 
         .form button {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.9) 0%, rgba(255, 215, 0, 0.9) 100%);
+            color: #1a1a2e;
             border: none;
-            border-radius: 15px;
+            border-radius: 12px;
             padding: 20px;
             font-size: 18px;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
+            border: 2px solid #ffd700;
+            font-family: 'MedievalSharp', cursive;
         }
 
         .form button:active {
@@ -533,16 +684,17 @@
         }
 
         .order-summary {
-            background: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
-            border-radius: 15px;
+            background: linear-gradient(135deg, rgba(40, 40, 80, 0.9) 0%, rgba(60, 60, 100, 0.9) 100%);
+            border-radius: 12px;
             padding: 20px;
             margin: 20px 0;
-            box-shadow: 0 2px 10px rgba(226, 209, 195, 0.3);
+            border: 2px solid #5d5d8d;
         }
 
         .order-summary h3 {
             margin-bottom: 15px;
-            color: #333;
+            color: #ffd700;
+            font-family: 'MedievalSharp', cursive;
         }
 
         .notification {
@@ -550,13 +702,15 @@
             top: 30px;
             left: 50%;
             transform: translateX(-50%) translateY(-100px);
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.95) 0%, rgba(255, 215, 0, 0.95) 100%);
+            color: #1a1a2e;
             padding: 20px 35px;
-            border-radius: 15px;
+            border-radius: 12px;
             z-index: 1000;
-            font-weight: 600;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            font-weight: 700;
+            border: 2px solid #ffd700;
+            font-family: 'MedievalSharp', cursive;
+            letter-spacing: 1px;
             animation: slideDown 0.5s ease forwards, fadeOut 0.5s ease 2s forwards;
         }
 
@@ -580,59 +734,58 @@
         }
 
         .strength-btn {
-            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-            border: none;
-            border-radius: 15px;
-            padding: 25px 15px;
+            background: linear-gradient(135deg, rgba(40, 40, 80, 0.9) 0%, rgba(60, 60, 100, 0.9) 100%);
+            border: 2px solid #5d5d8d;
+            border-radius: 12px;
+            padding: 25px 10px;
             font-size: 18px;
             font-weight: 600;
             cursor: pointer;
             text-align: center;
             transition: all 0.3s ease;
-            color: #333;
-            box-shadow: 0 4px 15px rgba(255, 236, 210, 0.3);
+            color: #e6d5b8;
+            font-family: 'Cinzel', serif;
         }
 
         .strength-btn:active {
             transform: scale(0.95);
-            box-shadow: 0 2px 8px rgba(255, 236, 210, 0.3);
         }
 
         .liquid-btn {
-            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-            border: none;
-            border-radius: 15px;
-            padding: 25px 15px;
+            background: linear-gradient(135deg, rgba(40, 40, 80, 0.9) 0%, rgba(60, 60, 100, 0.9) 100%);
+            border: 2px solid #5d5d8d;
+            border-radius: 12px;
+            padding: 25px 10px;
             font-size: 18px;
             font-weight: 600;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
-            color: #333;
-            box-shadow: 0 4px 15px rgba(168, 237, 234, 0.3);
+            color: #e6d5b8;
+            font-family: 'Cinzel', serif;
         }
 
         .liquid-btn:active {
             transform: scale(0.95);
-            box-shadow: 0 2px 8px rgba(168, 237, 234, 0.3);
         }
 
         .product-details-container {
-            background: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
-            border-radius: 15px;
+            background: linear-gradient(135deg, rgba(30, 30, 60, 0.9) 0%, rgba(40, 40, 80, 0.9) 100%);
+            border-radius: 12px;
             padding: 20px;
             margin: 20px 0;
-            box-shadow: 0 2px 10px rgba(226, 209, 195, 0.3);
+            border: 2px solid #4a4a6d;
         }
 
         .product-details-container p {
             margin: 10px 0;
-            font-size: 16px;
-            color: #333;
+            font-size: 15px;
+            color: #e6d5b8;
+            font-family: 'Gideon Roman', serif;
         }
 
         .product-details-container strong {
-            color: #666;
+            color: #b8a988;
         }
 
         .product-image-container {
@@ -641,10 +794,12 @@
         }
 
         .product-image {
-            max-width: 200px;
-            max-height: 200px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            max-width: 180px;
+            max-height: 180px;
+            border-radius: 10px;
+            border: 3px solid #4a4a6d;
+            background: rgba(26, 26, 46, 0.8);
+            padding: 10px;
         }
 
         ::-webkit-scrollbar {
@@ -652,26 +807,26 @@
         }
 
         ::-webkit-scrollbar-track {
-            background: #f1f1f1;
+            background: rgba(30, 30, 60, 0.8);
             border-radius: 10px;
         }
 
         ::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #d4af37 0%, #ffd700 100%);
             border-radius: 10px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+            background: linear-gradient(135deg, #ffd700 0%, #d4af37 100%);
         }
 
         .loading {
             display: inline-block;
             width: 20px;
             height: 20px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
+            border: 3px solid rgba(26, 26, 46, 0.3);
             border-radius: 50%;
-            border-top-color: white;
+            border-top-color: #1a1a2e;
             animation: spin 1s ease-in-out infinite;
             margin-right: 10px;
         }
@@ -679,27 +834,119 @@
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
+
+        /* Геншин-эффекты */
+        .glow-text {
+            text-shadow: 0 0 10px currentColor;
+        }
+
+        .parchment-bg {
+            background: linear-gradient(135deg, rgba(222, 184, 135, 0.1) 0%, rgba(210, 180, 140, 0.05) 100%);
+            border: 1px solid rgba(210, 180, 140, 0.3);
+        }
+
+        .crystal-border {
+            border-image: linear-gradient(45deg, #d4af37, #ffd700, #d4af37) 1;
+        }
+
+        /* Элементы для эффектов */
+        .element-icon {
+            font-size: 20px;
+            margin-right: 5px;
+        }
+
+        /* Анимация для появления элементов */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Стили для модального окна подтверждения возраста */
+        #age-verification-modal {
+            animation: fadeIn 0.5s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        #age-confirm-btn:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 10px rgba(212, 175, 55, 0.3);
+        }
+
+        #age-decline-btn:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 10px rgba(40, 40, 80, 0.3);
+        }
     </style>
 </head>
 <body>
     <div id="app">
-        <!-- Главный экран -->
-        <div id="welcome-screen" class="screen active">
-            <div class="header">
-                <img src="images/logo.jpg.jpg" alt="ХАЙП" class="logo">
-                <p class="subtitle">Магазин электронных устройств</p>
-            </div>
+        <!-- Модальное окно подтверждения возраста -->
+        <div id="age-verification-modal" class="screen" style="display: block; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1000;">
+            <div style="background: linear-gradient(135deg, rgba(12, 12, 29, 0.95) 0%, rgba(26, 26, 46, 0.98) 50%, rgba(22, 33, 62, 0.95) 100%); 
+                        position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+                        backdrop-filter: blur(10px);"></div>
             
-            <div class="warning-box">
-                <p>⚠️ Информация предоставляется в информационных целях</p>
-                <p>🔞 Подтверждаю, что мне исполнилось 18 лет</p>
-                <p>🚭 Никотин вредит вашему здоровью!</p>
+            <div style="position: relative; z-index: 1001; padding: 30px; max-width: 500px; margin: 0 auto; height: 100vh; display: flex; flex-direction: column; justify-content: center;">
+                <div style="text-align: center; margin-bottom: 40px;">
+                    <img src="images/logo.jpg.jpg" alt="HYPERIUM" style="max-width: 200px; height: auto; margin: 0 auto 25px auto; display: block; border-radius: 15px; border: 3px solid #d4af37; 
+                    box-shadow: 0 0 30px rgba(212, 175, 55, 0.5); background: rgba(26, 26, 46, 0.8); padding: 15px;">
+                    <h1 class="title" style="font-size: 36px;">HYPERIUM</h1>
+                    <p class="subtitle" style="font-size: 16px;">⚔️ Элитные испарители и табаки</p>
+                </div>
+                
+                <div class="warning-box" style="margin-bottom: 40px; background: linear-gradient(135deg, rgba(178, 34, 34, 0.9) 0%, rgba(139, 0, 0, 0.9) 100%);">
+                    <p style="font-size: 32px; margin-bottom: 20px;">⚠️ 18+</p>
+                    <p style="font-size: 18px; font-weight: bold; color: #ffd700; margin-bottom: 15px;">
+                        ИНФОРМАЦИЯ 18+
+                    </p>
+                    <p style="font-size: 16px; line-height: 1.6; margin-bottom: 20px;">
+                        Данный контент содержит информацию о никотиносодержащей продукции и предназначен исключительно для совершеннолетних. 
+                    </p>
+                    <p style="font-size: 16px; line-height: 1.6; margin-bottom: 20px; color: #ffd700; font-weight: bold;">
+                        ⚠️ КУРЕНИЕ ВРЕДИТ ВАШЕМУ ЗДОРОВЬЮ!
+                    </p>
+                    <p style="font-size: 16px; line-height: 1.6;">
+                        Материалы носят исключительно информационный характер. Продолжая использование сервиса, вы подтверждаете, что вам исполнилось 18+ лет.
+                    </p>
+                </div>
+                
+                <div style="display: flex; flex-direction: column; gap: 20px;">
+                    <button id="age-confirm-btn" style="background: linear-gradient(135deg, rgba(212, 175, 55, 0.9) 0%, rgba(255, 215, 0, 0.9) 100%); 
+                            color: #1a1a2e; border: none; border-radius: 12px; padding: 22px; font-size: 20px; font-weight: 700; cursor: pointer; 
+                            transition: all 0.3s ease; border: 2px solid #ffd700; font-family: 'MedievalSharp', cursive; letter-spacing: 1px;
+                            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);">
+                        🛡️ Мне исполнилось 18+, я подтверждаю свой возраст
+                    </button>
+                    
+                    <button id="age-decline-btn" style="background: linear-gradient(135deg, rgba(40, 40, 80, 0.9) 0%, rgba(60, 60, 100, 0.9) 100%); 
+                            color: #e6d5b8; border: none; border-radius: 12px; padding: 22px; font-size: 18px; font-weight: 600; cursor: pointer; 
+                            transition: all 0.3s ease; border: 2px solid #4a4a6d; font-family: 'Cinzel', serif;">
+                        🚫 Мне нет 18 лет, покинуть сайт
+                    </button>
+                </div>
+                
+                <p style="text-align: center; margin-top: 30px; color: #8b7d6b; font-size: 14px; font-style: italic;">
+                    ⚔️ Ответственное потребление ⚔️
+                </p>
+            </div>
+        </div>
+
+        <!-- Главный экран -->
+        <div id="welcome-screen" class="screen">
+            <div class="header">
+                <img src="images/logo.jpg.jpg" alt="HYPERIUM" class="logo floating">
+                <h1 class="title">HYPERIUM</h1>
+                <p class="subtitle">⚔️ Элитные испарители и табаки</p>
             </div>
             
             <div class="categories-grid">
                 <button class="category-btn" onclick="showBrands('disposables')">
                     <span>💨</span>
-                    <span>Одноразки</span>
+                    <span>Одноразовые устройства</span>
                 </button>
                 <button class="category-btn" onclick="showBrands('tobacco')">
                     <span>🍂</span>
@@ -707,16 +954,16 @@
                 </button>
                 <button class="category-btn" onclick="showBrands('liquids')">
                     <span>💧</span>
-                    <span>Жидкости</span>
+                    <span>Жидкости для вейпа</span>
                 </button>
                 <button class="category-btn" onclick="showPreorder()">
-                    <span>📝</span>
-                    <span>Предзаказ</span>
+                    <span>📜</span>
+                    <span>Предзаказ редкостей</span>
                 </button>
             </div>
             
             <button class="cart-btn" onclick="showCart()">
-                🛍️ Корзина (<span id="cart-count">0</span>)
+                ⚔️ Корзина (<span id="cart-count">0</span>)
             </button>
         </div>
 
@@ -724,7 +971,7 @@
         <div id="brands-screen" class="screen">
             <div class="screen-header">
                 <button class="back-btn" onclick="showWelcome()">←</button>
-                <h2 id="brands-title">💨 Выберите бренд</h2>
+                <h2 id="brands-title">⚔️ Выберите бренд</h2>
             </div>
             
             <div id="brands-grid" class="brands-grid">
@@ -755,16 +1002,17 @@
                 <!-- Детали товара с изображением -->
             </div>
             
+            <h3 style="margin: 20px 0 10px 0; color: #ffd700; text-align: center; font-family: 'MedievalSharp', cursive;">⚔️ Выберите вкус:</h3>
             <div id="flavors-grid" class="flavors-grid">
                 <!-- Вкусы будут загружены динамически (2 СТОЛБЦА) -->
             </div>
             
-            <h3 style="margin: 30px 0 10px 0; color: #333; text-align: center;">Количество:</h3>
+            <h3 style="margin: 25px 0 10px 0; color: #ffd700; text-align: center; font-family: 'MedievalSharp', cursive;">⚖️ Количество:</h3>
             <div id="quantity-selector" class="quantity-selector">
                 <!-- Кнопки количества в формате - 1 + -->
             </div>
             
-            <button class="add-to-cart-btn" onclick="addToCart()">Добавить в корзину</button>
+            <button class="add-to-cart-btn" onclick="addToCart()">Добавить в корзину 🛡️</button>
         </div>
 
         <!-- Экран для жевательного табака (выбор крепости) -->
@@ -775,8 +1023,8 @@
             </div>
             
             <div class="strength-grid">
-                <button class="strength-btn" onclick="showTobaccoBrands('Strong')">Strong</button>
-                <button class="strength-btn" onclick="showTobaccoBrands('Medium')">Medium</button>
+                <button class="strength-btn" onclick="showTobaccoBrands('Strong')">Strong ⚔️</button>
+                <button class="strength-btn" onclick="showTobaccoBrands('Medium')">Medium ⚜️</button>
             </div>
         </div>
 
@@ -796,7 +1044,7 @@
         <div id="cart-screen" class="screen">
             <div class="screen-header">
                 <button class="back-btn" onclick="showWelcome()">←</button>
-                <h2>🛍️ Корзина</h2>
+                <h2>⚔️ Корзина</h2>
             </div>
             
             <div id="cart-items">
@@ -804,14 +1052,14 @@
             </div>
             
             <div id="cart-empty" class="empty-cart">
-                <p>Ваша корзина пуста</p>
-                <button onclick="showWelcome()">Вернуться к покупкам</button>
+                <p>Корзина пуста... ⚔️</p>
+                <button onclick="showWelcome()">Вернуться к поиску сокровищ</button>
             </div>
             
             <!-- КНОПКА "ДОБАВИТЬ ЕЩЕ +" -->
             <div id="add-more-section" style="display: none;">
                 <button class="add-more-btn" onclick="addMoreProducts()">
-                    🛒 Добавить еще +
+                    🛡️ Добавить еще +
                 </button>
             </div>
             
@@ -820,7 +1068,7 @@
                     <span>Итого:</span>
                     <span id="cart-total">0 ₽</span>
                 </div>
-                <button class="checkout-btn" onclick="showCheckout()">Оформить заказ</button>
+                <button class="checkout-btn" onclick="showCheckout()">Оформить заказ ⚔️</button>
             </div>
         </div>
 
@@ -828,14 +1076,14 @@
         <div id="preorder-screen" class="screen">
             <div class="screen-header">
                 <button class="back-btn" onclick="showWelcome()">←</button>
-                <h2>📝 Предзаказ</h2>
+                <h2>📜 Предзаказ редкостей</h2>
             </div>
             
             <div class="form">
-                <textarea id="preorder-item" placeholder="Опишите товар, который вы хотите заказать (например: Elfbar 6000, вкус Мята)" rows="5"></textarea>
+                <textarea id="preorder-item" placeholder="Опишите желаемый товар (например: Elfbar 6000, вкус Мята)" rows="5"></textarea>
                 <input type="text" id="preorder-name" placeholder="Ваше имя">
                 <input type="tel" id="preorder-phone" placeholder="Телефон +7XXXXXXXXXX">
-                <button id="preorder-submit-btn" onclick="submitPreorder()">Отправить предзаказ</button>
+                <button id="preorder-submit-btn" onclick="submitPreorder()">Отправить предзаказ ⚔️</button>
             </div>
         </div>
 
@@ -854,7 +1102,7 @@
                     <!-- Сводка заказа будет сгенерирована динамически -->
                 </div>
                 
-                <button id="order-submit-btn" onclick="submitOrder()">Подтвердить заказ</button>
+                <button id="order-submit-btn" onclick="submitOrder()">Подтвердить заказ 🛡️</button>
             </div>
         </div>
     </div>
@@ -879,12 +1127,55 @@
         let selectedFlavor = null;
         let selectedQuantity = 1;
 
-        // Инициализация
-        tg.expand();
-        tg.enableClosingConfirmation();
-        updateCartCount();
+        // Проверка возраста
+        let ageVerified = localStorage.getItem('age_verified') === 'true';
 
-        // Данные товаров с изображениями
+        // Инициализация приложения
+        function initApp() {
+            if (!ageVerified) {
+                // Показываем модальное окно подтверждения возраста
+                showAgeVerificationModal();
+            } else {
+                // Прячем модальное окно и показываем главный экран
+                hideAgeVerificationModal();
+                showWelcome();
+            }
+            
+            tg.expand();
+            tg.enableClosingConfirmation();
+            updateCartCount();
+        }
+
+        // Показать модальное окно подтверждения возраста
+        function showAgeVerificationModal() {
+            document.getElementById('age-verification-modal').style.display = 'block';
+            document.getElementById('welcome-screen').classList.remove('active');
+            
+            // Обработчик подтверждения
+            document.getElementById('age-confirm-btn').onclick = function() {
+                localStorage.setItem('age_verified', 'true');
+                ageVerified = true;
+                hideAgeVerificationModal();
+                showWelcome();
+                showNotification('✅ Доступ разрешен. Ответственного потребления!');
+            };
+            
+            // Обработчик отказа
+            document.getElementById('age-decline-btn').onclick = function() {
+                showNotification('🚫 Доступ запрещен. Возвращайтесь, когда вам исполнится 18+');
+                // Через 2 секунды можно закрыть приложение или показать сообщение
+                setTimeout(() => {
+                    tg.close();
+                }, 2000);
+            };
+        }
+
+        // Скрыть модальное окно подтверждения возраста
+        function hideAgeVerificationModal() {
+            document.getElementById('age-verification-modal').style.display = 'none';
+        }
+
+        // Данные товаров с изображениями (те же данные)
         const productsData = {
             disposables: {
                 '🔥АКЦИЯ🔥': [
@@ -969,7 +1260,14 @@
         }
 
         function showWelcome() {
-            showScreen('welcome-screen');
+            // Скрываем модальное окно если оно еще видно
+            hideAgeVerificationModal();
+            
+            // Показываем главный экран
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+            document.getElementById('welcome-screen').classList.add('active');
         }
 
         // Показать бренды по категории
@@ -986,7 +1284,7 @@
                 return;
             }
             
-            document.getElementById('brands-title').textContent = '💨 Выберите бренд';
+            document.getElementById('brands-title').textContent = '⚔️ Выберите бренд';
             
             const brandsGrid = document.getElementById('brands-grid');
             brandsGrid.innerHTML = '';
@@ -1058,20 +1356,20 @@
                 detailsHtml += `
                     <p><strong>Бренд:</strong> ${currentProduct.brand}</p>
                     <p><strong>Затяжки:</strong> ${currentProduct.puffs}</p>
-                    <p><strong>Цена:</strong> <span style="color:#667eea;font-weight:bold;">${currentProduct.price} ₽</span></p>
+                    <p><strong>Цена:</strong> <span style="color:#ffd700;font-weight:bold;">${currentProduct.price} ₽</span></p>
                 `;
             } else if (currentCategory === 'tobacco') {
                 detailsHtml += `
                     <p><strong>Бренд:</strong> ${currentProduct.brand}</p>
                     <p><strong>Крепость:</strong> ${currentProduct.strength}</p>
-                    <p><strong>Цена:</strong> <span style="color:#667eea;font-weight:bold;">${currentProduct.price} ₽</span></p>
+                    <p><strong>Цена:</strong> <span style="color:#ffd700;font-weight:bold;">${currentProduct.price} ₽</span></p>
                 `;
             } else if (currentCategory === 'liquids') {
                 detailsHtml += `
                     <p><strong>Бренд:</strong> ${currentProduct.brand}</p>
                     <p><strong>Объем:</strong> ${currentProduct.volume}</p>
                     <p><strong>Крепость:</strong> ${currentProduct.strength}</p>
-                    <p><strong>Цена:</strong> <span style="color:#667eea;font-weight:bold;">${currentProduct.price} ₽</span></p>
+                    <p><strong>Цена:</strong> <span style="color:#ffd700;font-weight:bold;">${currentProduct.price} ₽</span></p>
                 `;
             }
             
@@ -1242,7 +1540,7 @@
             }
             
             saveCart();
-            showNotification('Товар добавлен в корзину!');
+            showNotification('⚔️ Товар добавлен в корзину!');
             showCart();
         }
 
@@ -1356,14 +1654,24 @@
                 // Отправляем заказ в Telegram группу
                 const user = tg.initDataUnsafe.user || {};
                 const username = user.username ? `@${user.username}` : 'Не указан';
+                const userId = user.id ? user.id : 'Не указан';
+                const firstName = user.first_name ? user.first_name : '';
+                const lastName = user.last_name ? user.last_name : '';
+                const fullName = (firstName + ' ' + lastName).trim() || 'Не указано';
                 
-                const messageText = `🎯 НОВЫЙ ПРЕДЗАКАЗ!\n\n` +
-                                   `👤 Пользователь: ${username}\n` +
-                                   `📱 ID: ${user.id || 'Не указан'}\n` +
-                                   `📝 Имя: ${name}\n` +
-                                   `📞 Телефон: ${cleanedPhone}\n` +
-                                   `🛒 Товар: ${item}\n` +
-                                   `🕐 Время: ${new Date().toLocaleString('ru-RU')}`;
+                const messageText = `⚔️ НОВЫЙ ПРЕДЗАКАЗ!\n\n` +
+                                   `👤 ИНФОРМАЦИЯ О ПОЛЬЗОВАТЕЛЕ:\n` +
+                                   `├ ID: ${userId}\n` +
+                                   `├ Username: ${username}\n` +
+                                   `├ Имя в Telegram: ${fullName}\n` +
+                                   `└ Язык: ${user.language_code || 'Не указан'}\n\n` +
+                                   `📞 КОНТАКТНАЯ ИНФОРМАЦИЯ:\n` +
+                                   `├ Имя: ${name}\n` +
+                                   `└ Телефон: ${cleanedPhone}\n\n` +
+                                   `🛒 ТОВАР:\n` +
+                                   `└ ${item}\n\n` +
+                                   `🕐 Время: ${new Date().toLocaleString('ru-RU')}\n` +
+                                   `📱 Платформа: Telegram Web App`;
                 
                 // Отправляем через Telegram Bot API
                 await sendToTelegramGroup(messageText);
@@ -1411,9 +1719,9 @@
                 }
                 
                 itemsText += `
-                    <div style="margin: 10px 0; padding: 10px; background: white; border-radius: 10px;">
-                        <strong>${itemDescription}</strong><br>
-                        ${item.price} ₽
+                    <div style="margin: 10px 0; padding: 10px; background: rgba(30, 30, 60, 0.8); border-radius: 10px; border: 1px solid #4a4a6d;">
+                        <strong style="color:#ffd700;">${itemDescription}</strong><br>
+                        <span style="color:#d4af37;font-weight:bold;">${item.price} ₽</span>
                     </div>
                 `;
             });
@@ -1421,7 +1729,7 @@
             summary.innerHTML = `
                 <h3>Ваш заказ:</h3>
                 ${itemsText}
-                <div style="font-size: 20px; font-weight: bold; margin-top: 15px; color: #667eea;">
+                <div style="font-size: 20px; font-weight: bold; margin-top: 15px; color: #ffd700;">
                     Итого: ${total} ₽
                 </div>
             `;
@@ -1453,17 +1761,31 @@
             submitBtn.disabled = true;
             
             try {
-                // Получаем данные пользователя
+                // Получаем данные пользователя из Telegram
                 const user = tg.initDataUnsafe.user || {};
                 const username = user.username ? `@${user.username}` : 'Не указан';
+                const userId = user.id ? user.id : 'Не указан';
+                const firstName = user.first_name ? user.first_name : '';
+                const lastName = user.last_name ? user.last_name : '';
+                const fullName = (firstName + ' ' + lastName).trim() || 'Не указано';
                 
-                // Формируем текст заказа
-                let orderText = `🛒 НОВЫЙ ЗАКАЗ!\n\n` +
-                               `👤 Пользователь: ${username}\n` +
-                               `📱 ID: ${user.id || 'Не указан'}\n` +
-                               `📝 Имя: ${name}\n` +
-                               `📞 Телефон: ${cleanedPhone}\n\n` +
-                               `📋 Содержимое заказа:\n`;
+                // Формируем текст заказа с полной информацией о пользователе
+                let orderText = `⚔️ НОВЫЙ ЗАКАЗ!\n\n`;
+                
+                // Информация о пользователе из Telegram
+                orderText += `👤 ИНФОРМАЦИЯ О ПОЛЬЗОВАТЕЛЕ:\n`;
+                orderText += `├ ID: ${userId}\n`;
+                orderText += `├ Username: ${username}\n`;
+                orderText += `├ Имя в Telegram: ${fullName}\n`;
+                orderText += `└ Язык: ${user.language_code || 'Не указан'}\n\n`;
+                
+                // Контактная информация из формы
+                orderText += `📞 КОНТАКТНАЯ ИНФОРМАЦИЯ:\n`;
+                orderText += `├ Имя: ${name}\n`;
+                orderText += `└ Телефон: ${cleanedPhone}\n\n`;
+                
+                // Содержимое заказа
+                orderText += `📋 СОДЕРЖИМОЕ ЗАКАЗА:\n`;
                 
                 let total = 0;
                 cart.forEach((item, index) => {
@@ -1481,8 +1803,9 @@
                     orderText += `${index + 1}. ${itemDescription} - ${item.flavor} - ${item.price}₽\n`;
                 });
                 
-                orderText += `\n💰 ИТОГО: ${total} ₽\n` +
-                           `🕐 Время: ${new Date().toLocaleString('ru-RU')}`;
+                orderText += `\n💰 ИТОГО: ${total} ₽\n`;
+                orderText += `🕐 Время: ${new Date().toLocaleString('ru-RU')}\n`;
+                orderText += `📱 Платформа: Telegram Web App`;
                 
                 // Отправляем заказ в Telegram группу
                 await sendToTelegramGroup(orderText);
@@ -1561,7 +1884,7 @@
 
         // Инициализация
         document.addEventListener('DOMContentLoaded', () => {
-            updateCartCount();
+            initApp();
         });
     </script>
 </body>
