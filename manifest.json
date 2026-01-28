@@ -1,22 +1,21 @@
 {
-  "name": "HYPERIUM | Магазин",
+  "name": "HYPERIUM",
   "short_name": "HYPERIUM",
   "description": "Элитные испарители и табаки",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#1a1a2e",
   "theme_color": "#1a1a2e",
-  "orientation": "portrait",
   "icons": [
     {
-      "src": "images/icon.jpg",
+      "src": "favicons/android-chrome-192x192.png",
       "sizes": "192x192",
-      "type": "image/jpeg"
+      "type": "image/png"
     },
     {
-      "src": "images/icon.jpg",
+      "src": "favicons/android-chrome-512x512.png",
       "sizes": "512x512",
-      "type": "image/jpeg"
+      "type": "image/png"
     }
   ]
 }
